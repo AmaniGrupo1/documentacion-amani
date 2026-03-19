@@ -1,0 +1,89 @@
+site_name: Amani Docs
+site_description: Documentación técnica de la plataforma Amani
+site_author: Iván
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: es
+  palette:
+    - scheme: default
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/brightness-7
+        name: Modo oscuro
+    - scheme: slate
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/brightness-4
+        name: Modo claro
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.tabs           # pestañas superiores por sección
+    - navigation.tabs.sticky
+    - navigation.sections       # secciones expandibles en sidebar
+    - navigation.expand
+    - navigation.top            # botón "volver arriba"
+    - navigation.indexes        # index.md como página de sección
+    - toc.follow                # TOC sigue el scroll
+    - search.suggest
+    - search.highlight
+    - content.code.copy         # botón copiar en bloques de código
+    - content.code.annotate
+
+plugins:
+  - search:
+      lang: es
+  - awesome-pages
+  - section-index
+  - literate-nav:
+      nav_file: SUMMARY.md
+  - minify:
+      minify_html: true
+  - gen-files:
+      scripts:
+        - scripts/gen_nav.py    # opcional: genera nav automático
+
+markdown_extensions:
+  - admonition                  # bloques !!! note, warning, etc.
+  - pymdownx.details            # bloques colapsables
+  - pymdownx.superfences        # code fences anidados
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true     # pestañas dentro de páginas
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+nav:
+  - Inicio: index.md
+  - Arquitectura:
+    - arquitectura/index.md
+    - Diagrama general: arquitectura/diagrama.md
+    - Base de datos: arquitectura/base-de-datos.md
+  - Backend (JavaDoc):
+    - javadoc/index.md          # generado por Dokka Maven
+  - Android (KDoc):
+    - kdoc/index.md             # generado por Dokka Gradle
+  - Guías:
+    - guias/index.md
+    - Instalación: guias/instalacion.md
+    - Docker Compose: guias/docker.md
+    - Notificaciones: guias/notificaciones.md
+    - WebSocket: guias/websocket.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/tu-usuario/amani-apirest
