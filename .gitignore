@@ -1,0 +1,12 @@
+# MkDocs - sitio generado (no debe versionarse)
+site/
+
+# Entorno virtual de Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
