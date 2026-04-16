@@ -1,0 +1,87 @@
+/* Amani Platform Technical Aesthetics - Premium CSS */
+
+:root {
+  --md-primary-fg-color: #5e35b1;
+  --md-primary-fg-color--light: #7e57c2;
+  --md-primary-fg-color--dark: #4527a0;
+  --md-accent-fg-color: #3949ab;
+  --md-accent-fg-color--transparent: rgba(57, 73, 171, 0.1);
+}
+
+/* Glassmorphism for headers and navigation */
+.md-header {
+  backdrop-filter: blur(10px);
+  background-color: var(--md-default-bg-color--transparent);
+  border-bottom: 1px solid rgba(126, 87, 194, 0.2);
+}
+
+.md-tabs {
+  backdrop-filter: blur(10px);
+  background-color: var(--md-default-bg-color--transparent);
+}
+
+/* Enhancing typography strictly with modern aesthetics */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Sleeker code blocks */
+.md-typeset pre>code {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Enhancing Grids and Cards for the landing page */
+.grid.cards > div {
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid var(--md-typeset-table-color);
+  border-radius: 12px;
+  background-color: var(--md-default-bg-color);
+}
+
+.grid.cards > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(94, 53, 177, 0.15);
+  border-color: var(--md-primary-fg-color);
+}
+
+/* Callouts / Admonitions */
+.md-typeset .admonition {
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Links and interactives */
+.md-typeset a {
+  transition: color 0.2s ease-in-out;
+  text-decoration-thickness: 1px;
+}
+
+.md-nav__link--active {
+  font-weight: 600;
+  color: var(--md-primary-fg-color);
+}
+
+/* Button enhancements */
+.md-button {
+  border-radius: 8px;
+  text-transform: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.md-button--primary:hover {
+  background-color: var(--md-primary-fg-color--dark);
+  box-shadow: 0 4px 12px rgba(94, 53, 177, 0.3);
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 76.1875em) {
+  .md-nav--primary .md-nav__title {
+    background-color: var(--md-primary-fg-color);
+    color: white;
+  }
+}
