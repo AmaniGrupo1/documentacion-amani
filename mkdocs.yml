@@ -1,6 +1,7 @@
 site_name: Amani
 site_description: Documentación técnica e interactiva de la plataforma Amani
 site_author: Amani Engineering Team
+site_url: https://amanigrupo1.github.io/documentacion-amani/
 
 repo_url: https://github.com/amanigrupo1/amani-apirest
 repo_name: Amani API
@@ -26,6 +27,7 @@ theme:
     - navigation.indexes
     - navigation.instant
     - navigation.instant.progress
+    - navigation.path
     - navigation.prune
     - navigation.sections
     - navigation.tabs
@@ -43,21 +45,21 @@ theme:
         name: Cambiar a modo claro
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: deep purple
+      primary: white
       accent: indigo
       toggle:
         icon: material/brightness-7
         name: Cambiar a modo oscuro
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: deep purple
+      primary: black
       accent: indigo
       toggle:
         icon: material/brightness-4
         name: Cambiar a modo sistema
   font:
-    text: Inter
-    code: JetBrains Mono
+    text: Plus Jakarta Sans
+    code: Fira Code
 
 extra_css:
   - assets/stylesheets/custom.css
