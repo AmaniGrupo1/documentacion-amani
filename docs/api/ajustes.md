@@ -4,7 +4,7 @@ Preferencias de usuario.
 
 ---
 
-## 📋 Endpoints
+## Endpoints
 
 ### GET /api/ajustes
 
@@ -44,7 +44,7 @@ Actualiza ajustes del usuario.
 
 ---
 
-## 🔐 Endpoints Admin
+## Endpoints Admin
 
 ### GET /api/admin/ajustes
 
@@ -54,7 +54,7 @@ Lista todos los ajustes.
 
 ---
 
-## 📋 Opciones de Configuración
+## Opciones de Configuración
 
 | Opción | Valores | Descripción |
 |--------|---------|-------------|
@@ -65,7 +65,7 @@ Lista todos los ajustes.
 
 ---
 
-## 📋 Checklist
+## Checklist
 
 - [ ] Guardar `idUsuario` del token JWT
 - [ ] Validar `timezone` (formato TZ DB)

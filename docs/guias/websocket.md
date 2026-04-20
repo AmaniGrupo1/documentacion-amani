@@ -4,7 +4,7 @@ Guía de integración con WebSocket (STOMP sobre SockJS).
 
 ---
 
-## 📡 Endpoint
+## Endpoint
 
 ```
 ws://localhost:8080/ws
@@ -12,7 +12,7 @@ ws://localhost:8080/ws
 
 ---
 
-## 🔧 Configuración
+## Configuración
 
 La configuración está en `WebSocketConfig.java`:
 
@@ -44,7 +44,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
 ---
 
-## 📡 Uso con JavaScript (SockJS)
+## Uso con JavaScript (SockJS)
 
 ```javascript
 // Instalar STOMP client
@@ -77,7 +77,7 @@ stompClient.connect({ headers: { Authorization: 'Bearer ' + token } },
 
 ---
 
-## 📡 Uso con Java (Cliente)
+## Uso con Java (Cliente)
 
 ```java
 @Configuration
@@ -101,7 +101,7 @@ public class WebSocketClientConfig {
 
 ---
 
-## 📡 Eventos WebSocket en Amani
+## Eventos WebSocket en Amani
 
 ### 1. Mensajes en Tiempo Real
 
@@ -129,7 +129,7 @@ public void enviarPush(String fcmToken, String titulo, String cuerpo) {
 
 ---
 
-## 📡 Protocolo STOMP
+## Protocolo STOMP
 
 ### Headers Comunes
 
@@ -149,7 +149,7 @@ public void enviarPush(String fcmToken, String titulo, String cuerpo) {
 
 ---
 
-## 📡 Seguridad
+## Seguridad
 
 Los endpoints WebSocket requieren autenticación JWT:
 
@@ -166,7 +166,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ---
 
-## 📡 Troubleshooting
+## Troubleshooting
 
 ### Error: "Connection refused"
 
@@ -185,7 +185,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ---
 
-## 📡 Ejemplo Completo
+## Ejemplo Completo
 
 ```javascript
 // chat.js

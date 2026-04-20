@@ -4,7 +4,7 @@ Chat y mensajería en tiempo real entre usuarios.
 
 ---
 
-## 📋 Endpoints (Paciente)
+## Endpoints (Paciente)
 
 ### GET /api/mensajes
 
@@ -50,7 +50,7 @@ Envía un nuevo mensaje.
 
 ---
 
-## 🔐 Endpoints Psicólogo
+## Endpoints Psicólogo
 
 ### GET /api/psicologo/mensajes
 
@@ -68,7 +68,7 @@ Envía mensaje a paciente.
 
 ---
 
-## 📋 WebSocket (En tiempo real)
+## WebSocket (En tiempo real)
 
 ### Destino para suscripción
 
@@ -88,7 +88,7 @@ stompClient.send('/app/chat', {}, JSON.stringify({
 
 ---
 
-## 📋 Endpoints Admin
+## Endpoints Admin
 
 ### GET /api/admin/mensajes
 
@@ -98,7 +98,7 @@ Lista todos los mensajes.
 
 ---
 
-## 📋 Checklist
+## Checklist
 
 - [ ] Validar `receiverId` exista
 - [ ] Validar `mensaje` no vacío

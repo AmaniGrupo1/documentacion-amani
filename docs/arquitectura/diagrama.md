@@ -4,195 +4,176 @@ Esquema visual de la arquitectura del sistema.
 
 ---
 
-## 📐 Diagrama de Capas
+## Diagrama de capas
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    CLIENT LAYER                             │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
-│  │   Web App   │  │  Mobile App │  │ Postman/Swag│         │
-│  │ (React)     │  │ (Android)   │  │ UI          │         │
-│  └─────────────┘  └─────────────┘  └─────────────┘         │
-└─────────────────────────────────────────────────────────────┘
-                            │ │ │
-                            ▼ ▼ ▼
-┌─────────────────────────────────────────────────────────────┐
-│              API GATEWAY / LOAD BALANCER                    │
-│                    (Opcional)                               │
-└─────────────────────────────────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│              CONTROLLER LAYER (REST)                        │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │  /auth/*      /api/admin/*   /api/psicologo/*      │   │
-│  │  /api/paciente/*  /api/citas   /api/mensajes       │   │
-│  │  /ws          /docs         Swagger UI             │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│              SERVICE LAYER (Negocio)                        │
-│  ┌──────────────────┐  ┌──────────────────┐               │
-│  │  Auth Service    │  │  Cita Service    │               │
-│  │  Usuario Service │  │  Sesion Service  │               │
-│  │  Email Service   │  │  Mensaje Service │               │
-│  │  Firebase Notif  │  │  Diario Service  │               │
-│  └──────────────────┘  └──────────────────┘               │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              Application Events (Publisher)         │   │
-│  │  CitaCreadaEvent → Email/Push Listeners            │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│            REPOSITORY LAYER (Spring Data JPA)               │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐        │
-│  │ UsuarioRepo │  │ CitaRepo    │  │ MensajeRepo │        │
-│  │ PacienteRepo│  │ SesionRepo  │  │ DiarioRepo  │        │
-│  └─────────────┘  └─────────────┘  └─────────────┘        │
-└─────────────────────────────────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────┐
-│              DATABASE LAYER                                 │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │  PostgreSQL (puerto 5433)                           │   │
-│  │  Schema: psicologia_app                             │   │
-│  │  ┌─────────────────────────────────────────────┐    │   │
-│  │  │  Tablas: usuarios, pacientes, psicologos    │    │   │
-│  │  │  Tablas: citas, sesiones, mensajes          │    │   │
-│  │  │  Tablas: diario_emociones, progreso         │    │   │
-│  │  │  Tablas: historial_clinico, ajustes         │    │   │
-│  │  │  Vistas: vista_agenda_psicologo, etc.       │    │   │
-│  │  └─────────────────────────────────────────────┘    │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    subgraph Client["Client Layer"]
+        WA[Web App]
+        MA[Mobile App<br/>Android]
+        SW[Swagger UI]
+    end
+    
+    subgraph Controller["Controller Layer (REST)"]
+        AUTH["/auth/*"]
+        ADMIN["/api/admin/*"]
+        PSI["/api/psicologo/*"]
+        PAC["/api/paciente/*"]
+        WS["/ws"]
+    end
+    
+    subgraph Service["Service Layer"]
+        AS[Auth Service]
+        CS[Cita Service]
+        US[Usuario Service]
+        ES[Email Service]
+        FS[Firebase Notif]
+        MS[Mensaje Service]
+        EV[Application Events<br/>CitaCreadaEvent → Listeners]
+    end
+    
+    subgraph Repository["Repository Layer (JPA)"]
+        UR[UsuarioRepo]
+        CR[CitaRepo]
+        MR[MensajeRepo]
+    end
+    
+    subgraph DB["Database Layer"]
+        PG[(PostgreSQL<br/>psicologia_app)]
+    end
+    
+    Client --> Controller
+    Controller --> Service
+    Service --> Repository
+    Repository --> DB
 ```
 
 ---
 
-## 🔄 Flujo de Autenticación
+## Flujo de autenticación
 
-```
-POST /auth/login
-    │
-    ├─→ Validar credenciales (BCrypt)
-    │
-    ├─→ Generar JWT (HS256, 24h)
-    │    ├─ Claims: email, rol
-    │    └─ Firma: jwt.secret
-    │
-    └─→ Response:
-         {
-           "token": "eyJhbG...",
-           "idUsuario": 1,
-           "rol": "ADMIN"
-         }
+```mermaid
+sequenceDiagram
+    participant C as Cliente
+    participant S as Servidor
+    participant DB as Base de datos
+    
+    C->>S: POST /auth/login
+    S->>DB: Validar credenciales (BCrypt)
+    DB-->>S: Usuario encontrado
+    S->>S: Generar JWT (HS256, 24h)
+    Note over S: Claims: email, rol
+    S-->>C: { token, idUsuario, rol }
 ```
 
 ---
 
-## 📡 Flujo WebSocket
+## Flujo WebSocket
 
-```
-Cliente                         Servidor
-  │                               │
-  ├─ CONNECT /ws ──────────────>  │  STOMP handshake
-  │                               │
-  ├─ SUBSCRIBE /topic/mensajes ─>  │  Register subscription
-  │                               │
-  ├─ SEND /app/chat             │
-  │                               │
-  │  └─→ Broadcast /topic/mensajes
-  │                               │
-  │  <─ MESSAGE /topic/mensajes
-  │                               │
-  └─<─ MESSAGE /topic/mensajes   │  Push a todos suscriptos
+```mermaid
+sequenceDiagram
+    participant C as Cliente
+    participant S as Servidor
+    
+    C->>S: CONNECT /ws (STOMP handshake)
+    C->>S: SUBSCRIBE /topic/mensajes
+    C->>S: SEND /app/chat
+    S->>S: Broadcast /topic/mensajes
+    S-->>C: MESSAGE /topic/mensajes
 ```
 
 ---
 
-## 📧 Flujo de Notificaciones
+## Flujo de notificaciones
 
-```
-Event (ApplicationEvent)
-    │
-    ├─ CitaCreadaEvent ────┐
-    ├─ CitaCanceladaEvent ─┼─→ @TransactionalEventListener
-    ├─ CitaRecordatorioEvent─┘
-    │
-    ├─→ EmailService → SMTP (JavaMailSender)
-    │
-    └─→ FirebaseNotificationService → FCM
-```
-
----
-
-## 🛡️ Flujo de Seguridad
-
-```
-Request
-    │
-    ├─→ JwtAuthFilter
-    │    ├─ Extract token
-    │    ├─ Validar firma JWT
-    │    ├─ Obtener UserDetails
-    │    └─ Set Authentication in SecurityContext
-    │
-    ├─→ SecurityFilterChain
-    │    ├─ Public endpoints → PermitAll
-    │    ├─ Role-based → HasRole("ADMIN"), etc.
-    │    └─ Authenticated → anyRequest().authenticated()
-    │
-    └─→ Controller
+```mermaid
+flowchart LR
+    E[ApplicationEvent] --> L["@TransactionalEventListener"]
+    L --> EMAIL[EmailService → SMTP]
+    L --> FCM[FirebaseNotificationService → FCM]
+    
+    subgraph Eventos
+        E1[CitaCreadaEvent]
+        E2[CitaCanceladaEvent]
+        E3[CitaRecordatorioEvent]
+    end
+    
+    E1 --> L
+    E2 --> L
+    E3 --> L
 ```
 
 ---
 
-## 📦 Relación Entidad-Entidad (ER)
+## Flujo de seguridad
 
-```
-┌─────────────┐      ┌─────────────┐
-│   Usuario   │      │ Situacion   │
-│-------------│      │-------------│
-│ id_usuario  │◄─────┤ id_situacion  │
-│ nombre      │  1:N │ nombre      │
-│ email       │      │ categoria   │
-│ rol         │      └─────────────┘
-│ password    │           ▲
-└─────────────┘           │
-       │        N:1       │
-       ├───────────────────┤
-       │                   │
-       ▼                   ▼
-┌─────────────┐      ┌─────────────┐
-│  Paciente   │      │PsicologoPac │
-│-------------│      │-------------│
-│ id_paciente │      │ id_paciente │
-│ id_usuario  │      │ id_psicologo│
-│ id_psicologo│      │ fechaInicio │
-└─────────────┘      │ fechaFin    │
-       │             └─────────────┘
-       │                   ▲
-       ├───────────────────┘
-       │
-       ▼
-┌─────────────┐      ┌─────────────┐
-│    Cita     │      │  Sesion     │
-│-------------│      │-------------│
-│ id_cita     │      │ id_sesion   │
-│ id_paciente │      │ id_cita     │
-│ id_psicologo│      │ notas       │
-│ start_datetime│     │ recomendaciones│
-└─────────────┘      └─────────────┘
+```mermaid
+flowchart TD
+    REQ[Request] --> JWT[JwtAuthFilter]
+    JWT --> EXT[Extraer token]
+    EXT --> VAL[Validar firma JWT]
+    VAL --> UD[Obtener UserDetails]
+    UD --> SEC[SecurityFilterChain]
+    SEC --> PUB{¿Endpoint público?}
+    PUB -->|Sí| PERMIT[PermitAll]
+    PUB -->|No| ROLE{¿Rol autorizado?}
+    ROLE -->|Sí| CTRL[Controller]
+    ROLE -->|No| DENY[403 Forbidden]
 ```
 
 ---
 
-## 🔄 Patrones Implementados
+## Relación Entidad-Entidad (ER)
+
+```mermaid
+erDiagram
+    USUARIO ||--o| PACIENTE : tiene
+    USUARIO ||--o| PSICOLOGO : tiene
+    PACIENTE }o--|| PSICOLOGO : asignado_a
+    PACIENTE ||--o{ CITA : agenda
+    PSICOLOGO ||--o{ CITA : atiende
+    CITA ||--o| SESION : genera
+    PACIENTE ||--o{ DIARIO_EMOCIONES : registra
+    PACIENTE ||--o{ MENSAJE : envia
+    PACIENTE ||--o{ HISTORIAL_CLINICO : tiene
+    PACIENTE ||--o{ DIRECCION : posee
+    
+    USUARIO {
+        bigint id_usuario PK
+        varchar nombre
+        varchar email UK
+        varchar password
+        enum rol
+        boolean activo
+    }
+    
+    PACIENTE {
+        bigint id_paciente PK
+        bigint id_usuario FK
+        bigint id_psicologo FK
+        date fecha_nacimiento
+        varchar genero
+    }
+    
+    PSICOLOGO {
+        bigint id_psicologo PK
+        bigint id_usuario FK
+        varchar especialidad
+        int experiencia
+    }
+    
+    CITA {
+        bigint id_cita PK
+        bigint id_paciente FK
+        bigint id_psicologo FK
+        timestamp start_datetime
+        enum estado
+    }
+```
+
+---
+
+## Patrones implementados
 
 | Patrón | Uso en Amani |
 |--------|--------------|

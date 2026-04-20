@@ -4,7 +4,7 @@ Historial médico y diagnósticos del paciente.
 
 ---
 
-## 📋 Endpoints (Paciente)
+## Endpoints (Paciente)
 
 ### GET /api/historial-clinico
 
@@ -63,7 +63,7 @@ Elimina un historial.
 
 ---
 
-## 🔐 Endpoints Psicólogo
+## Endpoints Psicólogo
 
 ### GET /api/psicologo/historial-clinico
 
@@ -84,7 +84,7 @@ Crea historial para paciente.
 
 ---
 
-## 📋 Endpoints Admin
+## Endpoints Admin
 
 ### GET /api/admin/historial-clinico
 
@@ -94,7 +94,7 @@ Lista todos los historiales clínicos.
 
 ---
 
-## 📋 Checklist
+## Checklist
 
 - [ ] Validar `idPaciente` exista
 - [ ] Validar `titulo` no vacío

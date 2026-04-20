@@ -4,7 +4,7 @@ Registro de sesiones de terapia.
 
 ---
 
-## 📋 Endpoints (Paciente)
+## Endpoints (Paciente)
 
 ### GET /api/sesiones
 
@@ -65,7 +65,7 @@ Elimina una sesión.
 
 ---
 
-## 🔐 Endpoints Psicólogo
+## Endpoints Psicólogo
 
 ### GET /api/psicologo/sesiones
 
@@ -83,7 +83,7 @@ Crea sesión para paciente.
 
 ---
 
-## 📋 Endpoints Admin
+## Endpoints Admin
 
 ### GET /api/admin/sesiones
 
@@ -93,7 +93,7 @@ Lista todas las sesiones.
 
 ---
 
-## 📋 Checklist
+## Checklist
 
 - [ ] Validar `idCita` exista
 - [ ] Validar `durationMinutes` > 0

@@ -4,7 +4,7 @@ Endpoints exclusivos para administradores.
 
 ---
 
-## 📋 Endpoints
+## Endpoints
 
 ### GET /api/admin/psicologos
 
@@ -113,7 +113,7 @@ Lista psicólogos con pacientes.
 
 ---
 
-## 📋 Endpoints Admin (Otro Rol)
+## Endpoints Admin (Otro Rol)
 
 ### GET /api/pacientes/admin
 
@@ -176,7 +176,7 @@ Lista sesiones (admin).
 
 ---
 
-## 🔐 Roles
+## Roles
 
 - `ADMIN` — Acceso completo
 - `PSICOLOGO` — Acceso limitado a su consultorio

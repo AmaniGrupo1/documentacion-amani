@@ -46,19 +46,19 @@ theme:
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: white
-      accent: indigo
+      accent: blue
       toggle:
         icon: material/brightness-7
         name: Cambiar a modo oscuro
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: black
-      accent: indigo
+      accent: blue
       toggle:
         icon: material/brightness-4
         name: Cambiar a modo sistema
   font:
-    text: Plus Jakarta Sans
+    text: Inter
     code: Fira Code
 
 extra_css:

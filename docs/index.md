@@ -4,41 +4,43 @@ hide:
   - toc
 ---
 
-# Bienvenido a la Plataforma Amani
+# Plataforma Amani
 
-Conecta a pacientes y psicólogos en un entorno unificado y seguro. Explora nuestra documentación técnica, descubre la arquitectura, e intégrate con nuestra API REST.
+Documentación técnica de la plataforma que conecta pacientes y psicólogos en un entorno seguro y unificado. Arquitectura, API REST, guías de integración y referencias.
 
 <div class="grid cards" markdown>
 
 - :material-api: **API REST**
   
-  Explora todos los endpoints, modelos de datos, flujos de autenticación y recursos técnicos necesarios para consumir nuestra plataforma.
+  Endpoints, modelos de datos, autenticación JWT y recursos técnicos para consumir la plataforma.
 
   [Explorar la API :octicons-arrow-right-24:](api/index.md)
 
 - :material-transit-connection-variant: **Arquitectura**
   
-  Comprende cómo estructuramos los servicios, la base de datos, el flujo en tiempo real (WebSockets) y el diseño centrado en el dominio.
+  Estructura de servicios, base de datos, comunicación en tiempo real (WebSockets) y patrones de diseño.
 
-  [Ver Arquitectura :octicons-arrow-right-24:](arquitectura/index.md)
+  [Ver arquitectura :octicons-arrow-right-24:](arquitectura/index.md)
 
-- :material-book-open-page-variant: **Guías de Desarrollo**
+- :material-book-open-page-variant: **Guías**
   
-  Aprende cómo instalar el entorno local, montar Docker Compose, usar el sistema de Notificaciones Push y compilar aplicaciones.
+  Instalación del entorno local, Docker Compose, notificaciones push y compilación de aplicaciones.
 
-  [Leer Guías :octicons-arrow-right-24:](guias/index.md)
+  [Leer guías :octicons-arrow-right-24:](guias/index.md)
 
-- :material-laptop: **Agentes Móviles & Referencias**
+- :material-laptop: **Referencias**
   
-  Documentación interna y KDoc/JavaDoc generada para Android e integraciones de backend. Aprende sobre los diferentes agentes involucrados.
+  Documentación generada (KDoc/JavaDoc) para el cliente Android y el backend Java.
 
-  [Referencias KDoc/JavaDoc :octicons-arrow-right-24:](javadoc/index.md)
+  [Ver referencias :octicons-arrow-right-24:](javadoc/index.md)
 
 </div>
 
-## Características Principales
+## Características principales
 
-1. **Autenticación Segura (JWT)**: Flujos separados para Pacientes y Psicólogos.
-2. **WebSockets Integrados**: Comunicación en tiempo real para sesiones y chat integrado.
-3. **Diario y Progreso Emocional**: API diseñada para trazar el progreso psicológico interactivo del paciente.
-4. **Infraestructura Escalable**: Configuración nativa `Docker` para despliegues instantáneos.
+| Característica | Descripción |
+|---|---|
+| **Autenticación JWT** | Flujos separados para pacientes, psicólogos y administradores |
+| **WebSockets** | Comunicación en tiempo real para chat y sesiones |
+| **Diario emocional** | API para el seguimiento del progreso psicológico del paciente |
+| **Infraestructura Docker** | Despliegue reproducible con Docker Compose |

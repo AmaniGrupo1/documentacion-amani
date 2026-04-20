@@ -4,7 +4,7 @@ Estadísticas y seguimiento del progreso emocional.
 
 ---
 
-## 📋 Endpoints (Paciente)
+## Endpoints (Paciente)
 
 ### GET /api/progreso-emocional
 
@@ -52,7 +52,7 @@ Crea un nuevo registro de progreso.
 
 ---
 
-## 🔐 Endpoints Psicólogo
+## Endpoints Psicólogo
 
 ### GET /api/psicologo/progreso-emocional
 
@@ -65,7 +65,7 @@ Lista progreso de pacientes.
 
 ---
 
-## 📋 Endpoints Admin
+## Endpoints Admin
 
 ### GET /api/admin/progreso-emocional
 
@@ -75,7 +75,7 @@ Lista todos los registros de progreso.
 
 ---
 
-## 📊 Uso en Psicología
+## Uso en Psicología
 
 **Objetivo:** Medir cambios en niveles de:
 - **Estrés** — nivel de presión/estrés percibido
@@ -86,7 +86,7 @@ Lista todos los registros de progreso.
 
 ---
 
-## 📋 Checklist
+## Checklist
 
 - [ ] Validar fechas (no futuras)
 - [ ] Validar niveles (0-10)

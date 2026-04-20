@@ -4,14 +4,14 @@ Esquema PostgreSQL y diseño de tablas.
 
 ---
 
-## 📊 Esquema General
+## Esquema General
 
 **Base de datos:** `psicologia_app`  
 **PostgreSQL:** puerto `5433` (configurable en `application.properties`)
 
 ---
 
-## 📋 Tablas Principales
+## Tablas Principales
 
 ### 1. `usuarios`
 
@@ -183,7 +183,7 @@ Direcciones del paciente.
 
 ---
 
-## 🔗 Tablas de Relación
+## Tablas de Relación
 
 ### `psicologo_paciente`
 
@@ -249,7 +249,7 @@ Test inicial de evaluación.
 
 ---
 
-## 🗂️ Vistas
+## Vistas
 
 ### `vista_agenda_psicologo`
 
@@ -265,7 +265,7 @@ Listado pacientes por psicólogo (relación activa).
 
 ---
 
-## ⚙️ Configuración
+## Configuración
 
 En `src/main/resources/application.properties`:
 
@@ -280,7 +280,7 @@ spring.jpa.properties.hibernate.default_schema=psicologia_app
 
 ---
 
-## 🔄 Migraciones
+## Migraciones
 
 Script SQL: `src/main/resources/amani.sql`
 

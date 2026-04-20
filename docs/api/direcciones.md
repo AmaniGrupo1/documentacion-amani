@@ -4,7 +4,7 @@ Direcciones del paciente.
 
 ---
 
-## 📋 Endpoints (Paciente)
+## Endpoints (Paciente)
 
 ### GET /api/direcciones
 
@@ -66,7 +66,7 @@ Elimina una dirección.
 
 ---
 
-## 🔐 Endpoints Psicólogo
+## Endpoints Psicólogo
 
 ### GET /api/psicologo/direcciones
 
@@ -79,7 +79,7 @@ Lista direcciones de pacientes.
 
 ---
 
-## 📋 Endpoints Admin
+## Endpoints Admin
 
 ### GET /api/admin/direcciones
 
@@ -89,7 +89,7 @@ Lista todas las direcciones.
 
 ---
 
-## 📋 Checklist
+## Checklist
 
 - [ ] Validar `idPaciente` exista
 - [ ] Validar `calle` no vacío

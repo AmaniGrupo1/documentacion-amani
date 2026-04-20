@@ -4,7 +4,7 @@ Gestión de pacientes y sus datos personales.
 
 ---
 
-## 📋 Endpoints
+## Endpoints
 
 ### GET /api/pacientes/admin
 
@@ -48,9 +48,10 @@ Crea un nuevo paciente (admin).
 }
 ```
 
-**Response 201:** Paciente creado
+**Response 201:** Paciente creado.
 
-**Errors:**
+**Errores:**
+
 - `400` — Datos inválidos
 - `401` — No autenticado
 
@@ -60,9 +61,10 @@ Crea un nuevo paciente (admin).
 
 Obtiene un paciente por ID.
 
-**Response 200:** Datos del paciente
+**Response 200:** Datos del paciente.
 
-**Errors:**
+**Errores:**
+
 - `404` — Paciente no encontrado
 
 ---
@@ -83,9 +85,10 @@ Actualiza datos de un paciente.
 }
 ```
 
-**Response 200:** Paciente actualizado
+**Response 200:** Paciente actualizado.
 
-**Errors:**
+**Errores:**
+
 - `400` — Datos inválidos
 - `404` — Paciente no encontrado
 
@@ -95,16 +98,17 @@ Actualiza datos de un paciente.
 
 Elimina un paciente.
 
-**Response 204:** No Content
+**Response 204:** No Content.
 
-**Errors:**
+**Errores:**
+
 - `404` — Paciente no encontrado
 
 ---
 
-## 🔗 Relaciones
+## Relaciones
 
-### Psicólogo Asignado
+### Psicólogo asignado
 
 ```json
 {
@@ -129,7 +133,7 @@ Elimina un paciente.
 
 ---
 
-## 📋 Checklist
+## Checklist
 
 - [ ] Validar `fechaNacimiento` (mayor de edad)
 - [ ] Validar `metodoPago` (ENUM)

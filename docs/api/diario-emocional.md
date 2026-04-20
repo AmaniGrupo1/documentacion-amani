@@ -4,7 +4,7 @@ Registro diario de emociones y estado de ánimo.
 
 ---
 
-## 📋 Endpoints (Paciente)
+## Endpoints (Paciente)
 
 ### GET /api/diario-emocional
 
@@ -66,7 +66,7 @@ Elimina un diario.
 
 ---
 
-## 🔐 Endpoints Psicólogo
+## Endpoints Psicólogo
 
 ### GET /api/psicologo/diario-emocional
 
@@ -79,7 +79,7 @@ Lista diarios emocionales de pacientes.
 
 ---
 
-## 📋 Endpoints Admin
+## Endpoints Admin
 
 ### GET /api/admin/diario-emocional
 
@@ -89,7 +89,7 @@ Lista todos los diarios emocionales.
 
 ---
 
-## 📋 Uso en Psicología
+## Uso en Psicología
 
 **Objetivo:** Seguimiento del estado emocional del paciente.
 
@@ -105,7 +105,7 @@ Lista todos los diarios emocionales.
 
 ---
 
-## 📋 Checklist
+## Checklist
 
 - [ ] Validar `intensidad` (1-10)
 - [ ] Validar `emocion` (enum o string)

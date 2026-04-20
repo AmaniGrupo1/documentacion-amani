@@ -4,52 +4,30 @@ Visión general de la arquitectura de la plataforma Amani.
 
 ---
 
-## 📐 Patrón Arquitectónico
+## Patrón arquitectónico
 
 La API sigue una **arquitectura por capas** con separación por roles:
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    Client Layer                         │
-│  (Web App, Mobile App, Postman, Swagger UI)            │
-└─────────────────────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│              Controller Layer (REST)                    │
-│  Endpoints públicos con anotaciones Swagger             │
-└─────────────────────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│              Service Layer (Negocio)                    │
-│  Lógica de negocio, transacciones, eventos              │
-└─────────────────────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│            Repository Layer (Datos)                     │
-│  Acceso a datos con Spring Data JPA                     │
-└─────────────────────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│              Database Layer (PostgreSQL)                │
-│  Esquema psicologia_app                                 │
-└─────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A[Client Layer<br/>Web App · Mobile App · Swagger UI] --> B[Controller Layer<br/>Endpoints REST con anotaciones OpenAPI]
+    B --> C[Service Layer<br/>Lógica de negocio · Transacciones · Eventos]
+    C --> D[Repository Layer<br/>Acceso a datos con Spring Data JPA]
+    D --> E[Database Layer<br/>PostgreSQL · Esquema psicologia_app]
 ```
 
 ---
 
-## 📦 Capas Detalladas
+## Capas detalladas
 
 ### 1. Configuration Layer
+
 Ubicación: `src/main/java/com/amani/amaniapirest/configuration/`
 
 | Clase | Responsabilidad |
 |-------|-----------------|
 | `SecurityConfig` | Configuración de Spring Security + JWT |
-| `JwtUtil` | Generación/validación de tokens JWT |
+| `JwtUtil` | Generación y validación de tokens JWT |
 | `JwtAuthFilter` | Filtro para validar tokens en requests |
 | `WebSocketConfig` | Configuración WebSocket STOMP |
 | `FirebaseConfig` | Cliente Firebase Admin SDK |
@@ -58,14 +36,17 @@ Ubicación: `src/main/java/com/amani/amaniapirest/configuration/`
 | `GlobalExceptionHandler` | Manejo global de excepciones |
 
 ### 2. Controller Layer
+
 Ubicación: `src/main/java/com/amani/amaniapirest/controllers/`
 
 **Por rol:**
+
 - `controladorAdministador/` — endpoints admin
 - `controladorPsicologo/` — endpoints psicólogo
 - `controladorPaciente/` — endpoints paciente
 
 **Por funcionalidad:**
+
 - `login/` — autenticación
 - `chat/` — WebSocket
 - `preguntasController/` — test inicial
@@ -73,49 +54,55 @@ Ubicación: `src/main/java/com/amani/amaniapirest/controllers/`
 - `situacionController/` — catálogo de situaciones
 
 ### 3. Service Layer
+
 Ubicación: `src/main/java/com/amani/amaniapirest/services/`
 
 **Servicios generales:**
+
 - `UsuarioService` — gestión usuarios
 - `EmailService` — envío de emails
 - `FirebaseNotificationService` — notificaciones push
 - `WebSocketPresenceTracker` — tracking de usuarios online
 
 **Por rol:**
+
 - `paciente/` — DiarioEmocionService, MensajeService, ProgresoEmocionalService
 - `psicologo/` — MensajePsicologoService, PsicologoSelfService
 - `serviceAdmin/` — DireccionAdminService, PacienteAdminService
 
 **Servicios de login:**
+
 - `serviciosLogin/AuthService` — login, registro, tokens
 
 ### 4. Repository Layer
+
 Ubicación: `src/main/java/com/amani/amaniapirest/repository/`
 
 Repositorios JPA: `UsuarioRepository`, `PacientesRepository`, `CitaRepository`, etc.
 
 ### 5. Models Layer
+
 Ubicación: `src/main/java/com/amani/amaniapirest/models/`
 
 Entidades JPA: `Usuario`, `Paciente`, `Psicologo`, `Cita`, `Sesion`, `Mensaje`, etc.
 
 ---
 
-## 🔐 Seguridad
+## Seguridad
 
 ### Autenticación JWT
 
-```
-POST /auth/login
-    ↓
-Validar credenciales
-    ↓
-Generar token JWT (HS256, 24h expiración)
-    ↓
-Return: { token, idUsuario, rol }
+```mermaid
+sequenceDiagram
+    participant C as Cliente
+    participant S as Servidor
+    C->>S: POST /auth/login (email, password)
+    S->>S: Validar credenciales (BCrypt)
+    S->>S: Generar token JWT (HS256, 24h)
+    S-->>C: { token, idUsuario, rol }
 ```
 
-### Roles y Permisos
+### Roles y permisos
 
 | Rol | Descripción | Endpoints |
 |-----|-------------|-----------|
@@ -123,7 +110,7 @@ Return: { token, idUsuario, rol }
 | `PSICOLOGO` | Gestión clínica | `/api/psicologo/**` |
 | `PACIENTE` | Acceso propio | `/api/paciente/**` |
 
-### Endpoints Públicos
+### Endpoints públicos
 
 - `POST /auth/login`
 - `POST /auth/register-paciente`
@@ -133,7 +120,7 @@ Return: { token, idUsuario, rol }
 
 ---
 
-## 🔄 Event-Driven Architecture
+## Event-Driven Architecture
 
 Patrón usado para notificaciones: `@TransactionalEventListener`
 
@@ -146,7 +133,7 @@ Patrón usado para notificaciones: `@TransactionalEventListener`
 | `CitaRecordatorioEvent` | 24h antes de cita | Email |
 | `UsuarioRegistradoEvent` | Nuevo usuario registrado | Email |
 
-### Patrón de Uso
+### Patrón de uso
 
 ```java
 // En el service
@@ -161,7 +148,7 @@ public void onCitaCreada(CitaCreadaEvent event) {
 
 ---
 
-## 📡 WebSocket (STOMP)
+## WebSocket (STOMP)
 
 ### Configuración
 
@@ -177,11 +164,12 @@ public void onCitaCreada(CitaCreadaEvent event) {
 
 ---
 
-## 🗄️ Base de Datos
+## Base de datos
 
 PostgreSQL con esquema `psicologia_app`.
 
 Tablas principales:
+
 - `usuarios` — cuenta de usuario
 - `pacientes` — perfil paciente
 - `psicologos` — perfil psicólogo

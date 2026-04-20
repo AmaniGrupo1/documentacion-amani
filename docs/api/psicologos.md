@@ -4,7 +4,7 @@ Gestión de psicólogos y su perfil profesional.
 
 ---
 
-## 📋 Endpoints
+## Endpoints
 
 ### GET /api/psicologo
 
@@ -161,7 +161,7 @@ Lista psicólogos con sus pacientes asignados.
 
 ---
 
-## 📋 Checklist
+## Checklist
 
 - [ ] Validar `licencia` única
 - [ ] Validar `experiencia` >= 0

@@ -4,18 +4,18 @@ Guía para instalar y configurar Amani localmente.
 
 ---
 
-## 📋 Requisitos Previos
+## Requisitos previos
 
-| Herramienta | Versión | Comando |
-|-------------|---------|---------|
+| Herramienta | Versión | Verificar |
+|-------------|---------|-----------|
 | Java | 21+ | `java --version` |
 | Maven | 3.9+ | `mvn --version` |
 | PostgreSQL | 14+ | `psql --version` |
-| Git | - | `git --version` |
+| Git | — | `git --version` |
 
 ---
 
-## 1️⃣ Clonar Repositorio
+## Clonar repositorio
 
 ```bash
 git clone https://github.com/AmaniGrupo1/amani-apirest.git
@@ -24,9 +24,9 @@ cd amani-apirest
 
 ---
 
-## 2️⃣ Configurar Base de Datos
+## Configurar base de datos
 
-### Opción A: Usar Docker Compose (recomendado)
+### Opción A: Docker Compose (recomendado)
 
 ```bash
 docker-compose up -d postgres
@@ -44,9 +44,9 @@ psql -U postgres -d psicologia_app -f src/main/resources/amani.sql
 
 ---
 
-## 3️⃣ Configurar Variables de Entorno
+## Configurar variables de entorno
 
-### Archivo: `src/main/resources/application.properties`
+Archivo: `src/main/resources/application.properties`
 
 ```properties
 # Database
@@ -70,11 +70,12 @@ spring.mail.username=noreply@apppsicologas.com
 file.upload-dir=uploads
 ```
 
-> **Nota:** El archivo de credenciales Firebase (`serviceAccountKey.json`) es opcional.
+!!! note "Firebase"
+    El archivo de credenciales Firebase (`serviceAccountKey.json`) es opcional. La aplicación arranca sin él.
 
 ---
 
-## 4️⃣ Compilar y Ejecutar
+## Compilar y ejecutar
 
 ### Con Maven Wrapper
 
@@ -97,15 +98,17 @@ java -jar target/amaniApirest-0.0.1-SNAPSHOT.jar
 
 ---
 
-## 5️⃣ Verificar
+## Verificar
 
 La aplicación estará disponible en:
 
-- **API REST:** `http://localhost:8080`
-- **Swagger UI:** `http://localhost:8080/docs`
-- **API Docs (JSON):** `http://localhost:8080/v3/api-docs`
+| Servicio | URL |
+|----------|-----|
+| API REST | `http://localhost:8080` |
+| Swagger UI | `http://localhost:8080/docs` |
+| API Docs (JSON) | `http://localhost:8080/v3/api-docs` |
 
-### Endpoint de inicio (admin por defecto)
+### Credenciales por defecto
 
 | Email | Contraseña |
 |-------|------------|
@@ -113,7 +116,7 @@ La aplicación estará disponible en:
 
 ---
 
-## 🔧 Comandos Útiles
+## Comandos útiles
 
 ### Limpiar proyecto
 
@@ -142,9 +145,9 @@ bash generate-pdf-report.sh
 
 ---
 
-## 🐳 Despliegue con Docker
+## Despliegue con Docker
 
-### Archivo: `Dockerfile`
+### Dockerfile
 
 ```dockerfile
 FROM openjdk:21-jdk-slim
@@ -163,25 +166,22 @@ docker-compose up -d
 
 ---
 
-## 🚨 Problemas Comunes
+## Problemas comunes
 
-### Error: "Falta el esquema psicologia_app"
+!!! warning "Error: Falta el esquema psicologia_app"
+    ```bash
+    psql -U postgres -d psicologia_app -f src/main/resources/amani.sql
+    ```
 
-```bash
-psql -U postgres -d psicologia_app -f src/main/resources/amani.sql
-```
+!!! warning "Error: JWT secret not configured"
+    Configurar `jwt.secret` en `application.properties`.
 
-### Error: "JWT secret not configured"
-
-Configurar `jwt.secret` en `application.properties`.
-
-### Error: "Database connection refused"
-
-Verificar PostgreSQL esté corriendo y las credenciales sean correctas.
+!!! warning "Error: Database connection refused"
+    Verificar que PostgreSQL esté corriendo y las credenciales sean correctas.
 
 ---
 
-## 📋 Checklist de Instalación
+## Checklist de instalación
 
 - [ ] Java 21 instalado
 - [ ] PostgreSQL ejecutándose (puerto 5433)

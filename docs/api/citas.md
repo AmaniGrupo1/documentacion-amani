@@ -4,7 +4,7 @@ Gestión de citas, agendas y disponibilidad.
 
 ---
 
-## 📋 Endpoints (Paciente)
+## Endpoints (Paciente)
 
 ### GET /api/citas
 
@@ -33,9 +33,10 @@ Lista todas las citas del paciente.
 
 Obtiene una cita por ID.
 
-**Response 200:** Datos de la cita
+**Response 200:** Datos de la cita.
 
-**Errors:**
+**Errores:**
+
 - `404` — Cita no encontrada
 
 ---
@@ -55,11 +56,12 @@ Crea una nueva cita.
 }
 ```
 
-**Response 201:** Cita creada
+**Response 201:** Cita creada.
 
-**Errors:**
+**Errores:**
+
 - `400` — Datos inválidos
-- `409` — Conflito de agenda
+- `409` — Conflicto de agenda
 
 ---
 
@@ -76,9 +78,10 @@ Actualiza una cita existente.
 }
 ```
 
-**Response 200:** Cita actualizada
+**Response 200:** Cita actualizada.
 
-**Errors:**
+**Errores:**
+
 - `400` — Datos inválidos
 - `404` — Cita no encontrada
 
@@ -88,9 +91,10 @@ Actualiza una cita existente.
 
 Elimina una cita.
 
-**Response 204:** No Content
+**Response 204:** No Content.
 
-**Errors:**
+**Errores:**
+
 - `404` — Cita no encontrada
 
 ---
@@ -100,6 +104,7 @@ Elimina una cita.
 Obtiene la agenda del paciente para un mes.
 
 **Query:**
+
 - `month` — formato `YYYY-MM`
 
 **Response 200:**
@@ -127,13 +132,13 @@ Obtiene la agenda del paciente para un mes.
 
 ---
 
-## 🔐 Endpoints Psicólogo
+## Endpoints (Psicólogo)
 
 ### GET /api/psicologo/citas
 
 Lista citas del psicólogo.
 
-**Response 200:** Lista de citas
+**Response 200:** Lista de citas.
 
 ---
 
@@ -141,13 +146,13 @@ Lista citas del psicólogo.
 
 Obtiene una cita específica.
 
-**Response 200:** Datos de la cita
+**Response 200:** Datos de la cita.
 
 ---
 
 ### PUT /api/psicologo/citas/{id}
 
-Confirma/actualiza cita.
+Confirma o actualiza una cita.
 
 **Request:**
 
@@ -159,25 +164,25 @@ Confirma/actualiza cita.
 
 ---
 
-## 📋 Endpoints Admin
+## Endpoints (Admin)
 
 ### GET /api/admin/citas
 
-Lista todas las citas (admin).
+Lista todas las citas del sistema.
 
-**Response 200:** Lista de todas las citas
+**Response 200:** Lista de todas las citas.
 
 ---
 
 ### GET /api/admin/citas/{id}
 
-Obtiene una cita (admin).
+Obtiene una cita específica.
 
-**Response 200:** Datos de la cita
+**Response 200:** Datos de la cita.
 
 ---
 
-## 📋 Estados de Cita
+## Estados de cita
 
 | Estado | Descripción |
 |--------|-------------|
@@ -188,7 +193,7 @@ Obtiene una cita (admin).
 
 ---
 
-## 📋 Checklist
+## Checklist
 
 - [ ] Validar `startDatetime` >= ahora
 - [ ] Validar `durationMinutes` > 0

@@ -1,30 +1,30 @@
 # API REST
 
-Documentación completa de endpoints de la API.
+Documentación completa de los endpoints de la API de Amani.
 
 ---
 
-## 📚 Documentación por Sección
+## Documentación por sección
 
 | Sección | Descripción |
 |---------|-------------|
 | [**Autenticación**](auth.md) | Login, registro, tokens JWT |
-| [**Pacientes**](pacientes.md) | CRUD pacientes, perfil |
+| [**Pacientes**](pacientes.md) | CRUD de pacientes, perfil |
 | [**Psicólogos**](psicologos.md) | Gestión de psicólogos |
-| [**Administración**](admin.md) | Endpoints admin |
+| [**Administración**](admin.md) | Endpoints de administración |
 | [**Citas**](citas.md) | Agendas y citas |
-| [**Diario Emocional**](diario-emocional.md) | Registro emociones |
-| [**Progreso Emocional**](progreso-emocional.md) | Estadísticas |
+| [**Diario Emocional**](diario-emocional.md) | Registro de emociones |
+| [**Progreso Emocional**](progreso-emocional.md) | Estadísticas de progreso |
 | [**Historial Clínico**](historial-clinico.md) | Historial médico |
 | [**Sesiones**](sesiones.md) | Sesiones de terapia |
-| [**Mensajes**](mensajes.md) | Chat |
-| [**Ajustes**](ajustes.md) | Preferencias |
-| [**Direcciones**](direcciones.md) | Direcciones paciente |
-| [**Situaciones**](situaciones.md) | Catálogo |
+| [**Mensajes**](mensajes.md) | Chat entre usuarios |
+| [**Ajustes**](ajustes.md) | Preferencias de usuario |
+| [**Direcciones**](direcciones.md) | Direcciones del paciente |
+| [**Situaciones**](situaciones.md) | Catálogo de situaciones |
 
 ---
 
-## 🔑 Credenciales de Prueba
+## Credenciales de prueba
 
 | Rol | Email | Contraseña |
 |-----|-------|------------|
@@ -34,15 +34,19 @@ Documentación completa de endpoints de la API.
 
 ---
 
-## 🧪 Probar con Swagger
+## Probar con Swagger
 
-Swagger UI: `http://localhost:8080/docs`
+La documentación interactiva está disponible en:
+
+```
+http://localhost:8080/docs
+```
 
 ---
 
-## 🔧 Configuración
+## Configuración
 
-### Base Path
+### Base path
 
 ```
 /api
@@ -50,13 +54,13 @@ Swagger UI: `http://localhost:8080/docs`
 
 ### Autenticación
 
-Todos los endpoints (excepto los públicos) requieren:
+Todos los endpoints protegidos requieren el header:
 
 ```
 Authorization: Bearer {token_jwt}
 ```
 
-### Headers Comunes
+### Headers comunes
 
 | Header | Valor |
 |--------|-------|
@@ -65,7 +69,7 @@ Authorization: Bearer {token_jwt}
 
 ---
 
-## 📦 DTOs Comunes
+## DTOs comunes
 
 ### Login Request
 
@@ -102,7 +106,7 @@ Authorization: Bearer {token_jwt}
 
 ---
 
-## 📊 Rate Limiting
+## Rate limiting
 
 Actualmente no hay rate limiting implementado. Para producción, considerar:
 
@@ -112,13 +116,13 @@ Actualmente no hay rate limiting implementado. Para producción, considerar:
 
 ---
 
-## 🔄 Versionado
+## Versionado
 
 Versión actual: **v1.0.0**
 
 ---
 
-## 📖 Estructura de URLs
+## Estructura de URLs
 
 ```
 /auth/*
@@ -132,7 +136,7 @@ Versión actual: **v1.0.0**
     ├── POST /                     # Crear cita
     ├── PUT /{id}                  # Actualizar cita
     ├── DELETE /{id}               # Eliminar cita
-    └── GET /paciente/{id}/agenda # Agenda mensual
+    └── GET /paciente/{id}/agenda  # Agenda mensual
 
 /api/psicologo/*
     ├── POST /{id}/foto            # Subir foto
@@ -150,9 +154,9 @@ Versión actual: **v1.0.0**
 
 ---
 
-## 🛡️ Seguridad
+## Seguridad
 
-### Endpoints Públicos (sin auth)
+### Endpoints públicos (sin autenticación)
 
 - `POST /auth/login`
 - `POST /auth/register-paciente`
@@ -160,7 +164,7 @@ Versión actual: **v1.0.0**
 - `GET /api/psicologo/pacientes/*/psicologo`
 - `/docs/**`, `/v3/api-docs/**`
 
-### Endpoints Admin
+### Endpoints de administración
 
 - `POST /auth/register-admin`
 - `GET /auth/admins`
@@ -168,16 +172,16 @@ Versión actual: **v1.0.0**
 - `GET /api/pacientes/admin`
 - `GET /api/admin/**`
 
-### Endpoints Psicólogo
+### Endpoints de psicólogo
 
 - `GET /api/psicologo/**`
 - `GET /api/psicologo/pacientes/getAll/**`
 
 ---
 
-## 📝 Notas
+## Notas
 
 - Todos los endpoints validan JWT y roles
-- Errores devuelven status code 4xx/5xx
-- Responses exitosos devuelven 200/201/204
+- Los errores devuelven status code 4xx/5xx
+- Las respuestas exitosas devuelven 200/201/204
 - Paginación: no implementada (añadir si es necesario)

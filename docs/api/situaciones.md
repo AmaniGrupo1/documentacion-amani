@@ -4,7 +4,7 @@ Catálogo de situaciones (contexto del paciente).
 
 ---
 
-## 📋 Endpoints
+## Endpoints
 
 ### GET /api/situaciones
 
@@ -33,7 +33,7 @@ Lista todas las situaciones (público).
 
 ---
 
-## 🔐 Endpoints Admin
+## Endpoints Admin
 
 ### POST /api/admin/situaciones
 
@@ -80,7 +80,7 @@ Elimina una situación.
 
 ---
 
-## 📋 Categorías Comunes
+## Categorías Comunes
 
 | Categoría | Situaciones |
 |-----------|-------------|
@@ -91,7 +91,7 @@ Elimina una situación.
 
 ---
 
-## 📋 Checklist
+## Checklist
 
 - [ ] Validar `nombre` único
 - [ ] Validar `categoria` en enum

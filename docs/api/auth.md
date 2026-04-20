@@ -4,7 +4,7 @@ Endpoints para login, registro y gestión de tokens JWT.
 
 ---
 
-## 🔐 Endpoints
+## Endpoints
 
 ### POST /auth/login
 
@@ -32,7 +32,8 @@ Inicia sesión con credenciales y devuelve token JWT.
 }
 ```
 
-**Errors:**
+**Errores:**
+
 - `401` — Credenciales inválidas
 - `404` — Usuario no encontrado
 
@@ -72,9 +73,10 @@ Registra un nuevo paciente.
 }
 ```
 
-**Response 200:** Mismo formato que login
+**Response 200:** Mismo formato que login.
 
-**Errors:**
+**Errores:**
+
 - `400` — Datos inválidos
 - `409` — Email ya registrado
 
@@ -95,9 +97,10 @@ Registra un nuevo administrador.
 }
 ```
 
-**Response 200:** Mismo formato que login
+**Response 200:** Mismo formato que login.
 
-**Errors:**
+**Errores:**
+
 - `400` — Datos inválidos
 - `409` — Email ya registrado
 - `401` — No autenticado (requiere rol ADMIN)
@@ -122,9 +125,10 @@ Registra un nuevo psicólogo.
 }
 ```
 
-**Response 200:** Mismo formato que login
+**Response 200:** Mismo formato que login.
 
-**Errors:**
+**Errores:**
+
 - `400` — Datos inválidos
 - `409` — Email ya registrado
 - `401` — No autenticado (requiere rol ADMIN)
@@ -150,7 +154,8 @@ Lista todos los administradores.
 ]
 ```
 
-**Errors:**
+**Errores:**
+
 - `401` — No autenticado (requiere rol ADMIN)
 
 ---
@@ -160,6 +165,7 @@ Lista todos los administradores.
 Da de baja a un paciente.
 
 **Path:**
+
 - `{id}` — ID del paciente
 
 **Response 200:**
@@ -168,17 +174,18 @@ Da de baja a un paciente.
 Paciente dado de baja correctamente
 ```
 
-**Errors:**
+**Errores:**
+
 - `401` — No autenticado
 - `404` — Paciente no encontrado
 
 ---
 
-## 🔑 JWT Token
+## Token JWT
 
-### Estructura del Token
+### Estructura del token
 
-```
+```json
 {
   "sub": "email@usuario.com",
   "rol": "ADMIN",
@@ -189,7 +196,7 @@ Paciente dado de baja correctamente
 
 ### Caducidad
 
-- **24 horas** (86400000 ms configurable)
+- **24 horas** (86400000 ms, configurable)
 
 ### Revocación
 
@@ -197,7 +204,7 @@ Actualmente no hay mecanismo de revocación. El token es válido hasta su expira
 
 ---
 
-## 🧪 Ejemplo con cURL
+## Ejemplo con cURL
 
 ```bash
 # Login
@@ -212,7 +219,7 @@ curl -X GET http://localhost:8080/api/psicologo \
 
 ---
 
-## 📋 Checklist de Autenticación
+## Checklist de autenticación
 
 - [ ] `jwt.secret` configurado en `application.properties`
 - [ ] `jwt.expiration` configurado
@@ -222,9 +229,9 @@ curl -X GET http://localhost:8080/api/psicologo \
 
 ---
 
-## 🚨 Seguridad
+## Seguridad
 
-### Recomendaciones de Producción
+### Recomendaciones de producción
 
 1. **JWT Secret:** Usar clave de al menos 256 bits
 2. **HTTPS:** Siempre usar HTTPS en producción

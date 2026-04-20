@@ -4,7 +4,7 @@ Guía de configuración del sistema de notificaciones.
 
 ---
 
-## 📧 Email (SMTP)
+## Email (SMTP)
 
 ### Configuración
 
@@ -50,7 +50,7 @@ public class EmailService {
 
 ---
 
-## 📱 Notificaciones Push (Firebase)
+## Notificaciones Push (Firebase)
 
 ### Configuración
 
@@ -99,7 +99,7 @@ public class FirebaseNotificationService {
 
 ---
 
-## 🔄 Integración con Events
+## Integración con Events
 
 ### Eventos Disparadores
 
@@ -133,7 +133,7 @@ public class CitaEventListener {
 
 ---
 
-## 📱 Configuración Mobile (Android)
+## Configuración Mobile (Android)
 
 ### 1. Agregar dependencia
 
@@ -188,7 +188,7 @@ FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
 
 ---
 
-## 📋 Checklist de Configuración
+## Checklist de Configuración
 
 ### Email
 
@@ -205,7 +205,7 @@ FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Email local (sin SMTP real)
 
@@ -224,7 +224,7 @@ Firebase no requiere configuración real para que la app arranque. Los intentos 
 
 ---
 
-## 📊 Logs de Notificaciones
+## Logs de Notificaciones
 
 ### Email
 
@@ -243,7 +243,7 @@ DEBUG [FCM] Token vacío — notificación omitida
 
 ---
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 ### Email no llega
 
